@@ -1,0 +1,163 @@
+@import './variables';
+
+.sidebars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; // Allows clicking through the container
+  z-index: 1000;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 280px;
+  background: white;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+
+  &.left-sidebar {
+    left: 0;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+
+    .sidebar-toggle {
+      right: -50px;
+      left: auto;
+    }
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  &.right-sidebar {
+    right: 0;
+    transform: translateX(100%);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    text-align: right;
+
+    .sidebar-toggle {
+      left: -50px;
+      right: auto;
+    }
+
+    &.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-content {
+      font-family: 'Assistant', sans-serif;
+    }
+  }
+
+  .sidebar-toggle {
+    position: absolute;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background: $primary-color;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+
+  .sidebar-content {
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+
+    h3 {
+      color: $secondary-color;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+  }
+
+  .menu-section {
+    margin-bottom: 30px;
+
+    h4 {
+      color: $secondary-color;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+  }
+
+  .language-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .language-button {
+      padding: 10px;
+      border: 2px solid $primary-color;
+      border-radius: $border-radius;
+      background: transparent;
+      color: $secondary-color;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba($primary-color, 0.1);
+      }
+
+      &.active {
+        background: $primary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+// Update the main container to account for sidebars
+.container {
+  margin: 0 300px !important; // Add margin for both sidebars
+  max-width: calc(100% - 600px) !important; // Account for sidebar widths
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+// LTR Support (when English is selected)
+.ltr {
+  .sidebar {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+
+    &.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+      left: auto;
+      right: -50px;
+    }
+
+    .sidebar-content {
+      text-align: left;
+    }
+  }
+} 

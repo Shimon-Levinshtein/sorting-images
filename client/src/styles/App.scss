@@ -1,0 +1,190 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2c3e50;
+$success-color: #2ecc71;
+$background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+$border-radius: 8px;
+$transition-speed: 0.3s;
+
+// Mixins
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background $transition-speed ease;
+}
+
+body {
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+}
+
+// Main Container
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: $background-gradient;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  direction: rtl;
+  text-align: right;
+
+  &.ltr {
+    direction: ltr;
+    text-align: left;
+    
+    .form-group label {
+      text-align: left;
+    }
+
+    .status {
+      text-align: left;
+    }
+  }
+}
+
+// Typography
+h1 {
+  text-align: center;
+  color: $secondary-color;
+  margin-bottom: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+// Form Elements
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $secondary-color;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    transition: border-color $transition-speed ease;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+}
+
+// Buttons
+.sort-button {
+  @include button-base;
+  width: 100%;
+  padding: 1rem;
+  background: $primary-color;
+  color: white;
+  font-size: 1.1rem;
+
+  &:hover {
+    background: darken($primary-color, 10%);
+  }
+
+  &:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+  }
+}
+
+.language-toggle {
+  @include button-base;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background: $secondary-color;
+  color: white;
+
+  &:hover {
+    background: darken($secondary-color, 10%);
+  }
+}
+
+// Status Messages
+.status {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: $border-radius;
+  text-align: center;
+  background: $success-color;
+  color: white;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// Font Face
+@font-face {
+  font-family: 'Assistant';
+  src: url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&display=swap');
+}
+
+.input-with-button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  input {
+    flex: 1;
+    cursor: default;
+  }
+
+  .browse-button {
+    padding: 0.8rem 1.2rem;
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-speed ease;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+}
+
+.progress-bar {
+  margin: 20px 0;
+  height: 20px;
+  background: #eee;
+  border-radius: $border-radius;
+  overflow: hidden;
+  position: relative;
+
+  .progress-fill {
+    height: 100%;
+    background: $primary-color;
+    transition: width 0.3s ease;
+  }
+
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// RTL specific styles for input-with-button
+.rtl {
+  .input-with-button {
+    flex-direction: row-reverse;
+  }
+} 
