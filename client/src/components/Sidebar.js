@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Sidebar.scss';
+import styles from '../styles/Sidebar.module.scss';
 
 const Sidebar = ({ language, toggleLanguage, translations }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ const Sidebar = ({ language, toggleLanguage, translations }) => {
     <>
       <div className={`sidebar ${isHebrew ? 'right-sidebar' : 'left-sidebar'} ${isOpen ? 'open' : ''}`}>
         <button 
-          className="sidebar-toggle"
+          className={styles['sidebar-toggle']}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? '×' : '☰'}
@@ -23,13 +24,13 @@ const Sidebar = ({ language, toggleLanguage, translations }) => {
             <h4>{isHebrew ? 'שפה' : 'Language'}</h4>
             <div className="language-options">
               <button 
-                className={`language-button ${language === 'en' ? 'active' : ''}`}
+                className={`${styles['language-button']} ${language === 'en' ? styles.active : ''}`}
                 onClick={() => language !== 'en' && toggleLanguage()}
               >
                 English
               </button>
               <button 
-                className={`language-button ${language === 'he' ? 'active' : ''}`}
+                className={`${styles['language-button']} ${language === 'he' ? styles.active : ''}`}
                 onClick={() => language !== 'he' && toggleLanguage()}
               >
                 עברית

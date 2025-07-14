@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react';
 import { LanguageContext } from './context/LanguageContext';
 import Sidebar from './components/Sidebar';
-import './styles/App.scss';
+import styles from './styles/App.module.scss';
 
 // Check if we're running in Electron
 const isElectron = window.require !== undefined;
@@ -91,12 +91,12 @@ function App() {
         toggleLanguage={toggleLanguage} 
         translations={translations}
       />
-      <div className={`container ${language === 'he' ? 'rtl' : 'ltr'}`}>
+      <div className={`${styles.container} ${language === 'he' ? styles.rtl : styles.ltr}`}>
         <h1>{translations.title}</h1>
         
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label>{translations.sourcePath}</label>
-          <div className="input-with-button">
+          <div className={styles['input-with-button']}>
             <input
               type="text"
               value={sourcePath}
@@ -112,7 +112,7 @@ function App() {
               onChange={(e) => handleFolderSelect(e, 'source')}
             />
             <button 
-              className="browse-button"
+              className={styles['browse-button']}
               onClick={() => sourceInputRef.current.click()}
             >
               {translations.browse}
@@ -120,9 +120,9 @@ function App() {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label>{translations.destinationPath}</label>
-          <div className="input-with-button">
+          <div className={styles['input-with-button']}>
             <input
               type="text"
               value={destinationPath}
@@ -138,7 +138,7 @@ function App() {
               onChange={(e) => handleFolderSelect(e, 'destination')}
             />
             <button 
-              className="browse-button"
+              className={styles['browse-button']}
               onClick={() => destinationInputRef.current.click()}
             >
               {translations.browse}
@@ -147,24 +147,24 @@ function App() {
         </div>
 
         {progress > 0 && progress < 100 && (
-          <div className="progress-bar">
+          <div className={styles['progress-bar']}>
             <div 
-              className="progress-fill" 
+              className={styles['progress-fill']} 
               style={{ width: `${progress}%` }}
             />
-            <span className="progress-text">{`${progress}%`}</span>
+            <span className={styles['progress-text']}>{`${progress}%`}</span>
           </div>
         )}
 
         <button 
-          className="sort-button"
+          className={styles['sort-button']}
           onClick={handleSort}
           disabled={loading || !sourcePath || !destinationPath}
         >
           {loading ? translations.sorting : translations.sortButton}
         </button>
 
-        {status && <div className="status">{status}</div>}
+        {status && <div className={styles.status}>{status}</div>}
       </div>
     </>
   );
